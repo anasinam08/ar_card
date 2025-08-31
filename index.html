@@ -3,26 +3,32 @@
   <head>
     <title>Wedding AR</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs>
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+      
       <!-- Marker setup -->
       <a-marker type="pattern" url="pattern-marker.patt">
-        <!-- 3D Heart -->
+        
+        <!-- 3D Heart (bouncing & rotating) -->
         <a-entity 
-          geometry="primitive: sphere; radius: 0.5" 
-          material="color: red; shader: standard" 
-          position="0 0.5 0">
+          geometry="primitive: sphere; radius: 0.4" 
+          material="color: red; shader: standard; opacity: 0.9" 
+          position="0 0.5 0"
+          animation="property: position; dir: alternate; dur: 1500; easing: easeInOutSine; loop: true; to: 0 0.8 0"
+          animation__rotation="property: rotation; to: 0 360 0; dur: 5000; loop: true; easing: linear">
         </a-entity>
 
-        <!-- Floating Text -->
+        <!-- Floating Gold Text -->
         <a-text 
           value="Ali ❤️ Sara" 
           color="#FFD700" 
-          position="-0.5 1.5 0" 
-          scale="2 2 2">
+          position="-0.7 1.5 0" 
+          scale="2 2 2"
+          animation="property: position; dir: alternate; dur: 2000; easing: easeInOutSine; loop: true; to: -0.7 1.7 0">
         </a-text>
+
       </a-marker>
 
       <!-- Camera -->
