@@ -5,18 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <!-- Optional: Add some CSS to ensure the scene fills the screen on all devices -->
+    <style>
+      .arjs-loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .arjs-loader-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+
   </head>
   <body style="margin: 0; overflow: hidden;">
-    <!-- We add arjs='sourceType: webcam; trackingMethod: best; debugUIEnabled: false;' for better performance -->
-    <a-scene embedded arjs='sourceType: webcam; trackingMethod: best; debugUIEnabled: false;'>
 
-      <!-- 
-        This is your marker. 
-        Make sure the url points to the .patt file you generated.
-      -->
+    <!-- Show a loading spinner while the camera loads -->
+    <div class="arjs-loader">
+      <div class="arjs-loader-spinner"></div>
+    </div>
+
+    <!-- 
+      THE FIX IS HERE: We added 'videoTexture: true' to the arjs properties.
+      This uses the raw camera feed and prevents the "zoom" effect.
+    -->
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      embedded 
+      arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false;'>
+
+      <!-- Your marker -->
       <a-marker type="pattern" url="pattern-marker.patt">
 
-        <!-- A spinning heart instead of a sphere -->
+        <!-- A spinning heart -->
         <a-entity
           text="value: ❤️; align: center;"
           scale="10 10 10"
@@ -26,7 +67,7 @@
 
         <!-- Floating Text -->
         <a-text 
-          value="Anas & Laiba" 
+          value="Ali & Sara" 
           color="#DBB561" 
           align="center"
           position="0 1.5 0" 
