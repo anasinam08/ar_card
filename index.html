@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Wedding AR</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+    <title>Ali & Sara's AR Wedding Card</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-      
-      <!-- Marker setup -->
-      <a-marker type="pattern" url="https://raw.githubusercontent.com/anasinam08/ar_card/main/pattern-marker.patt">
-        
-        <!-- 3D Heart (bouncing & rotating) -->
-        <a-entity 
-          geometry="primitive: sphere; radius: 0.4" 
-          material="color: red; shader: standard; opacity: 0.9" 
+    <!-- We add arjs='sourceType: webcam; trackingMethod: best; debugUIEnabled: false;' for better performance -->
+    <a-scene embedded arjs='sourceType: webcam; trackingMethod: best; debugUIEnabled: false;'>
+
+      <!-- 
+        This is your marker. 
+        Make sure the url points to the .patt file you generated.
+      -->
+      <a-marker type="pattern" url="pattern-marker.patt">
+
+        <!-- A spinning heart instead of a sphere -->
+        <a-entity
+          text="value: ❤️; align: center;"
+          scale="10 10 10"
           position="0 0.5 0"
-          animation="property: position; dir: alternate; dur: 1500; easing: easeInOutSine; loop: true; to: 0 0.8 0"
-          animation__rotation="property: rotation; to: 0 360 0; dur: 5000; loop: true; easing: linear">
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 4000; easing: linear;">
         </a-entity>
 
-        <!-- Floating Gold Text -->
+        <!-- Floating Text -->
         <a-text 
-          value="Ali ❤️ Sara" 
-          color="#FFD700" 
-          position="-0.7 1.5 0" 
-          scale="2 2 2"
-          animation="property: position; dir: alternate; dur: 2000; easing: easeInOutSine; loop: true; to: -0.7 1.7 0">
+          value="Anas & Laiba" 
+          color="#DBB561" 
+          align="center"
+          position="0 1.5 0" 
+          scale="2 2 2">
         </a-text>
 
       </a-marker>
@@ -36,4 +40,3 @@
     </a-scene>
   </body>
 </html>
-
